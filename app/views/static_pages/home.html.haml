@@ -1,18 +1,54 @@
 %pre{ "ng-non-bindable" => true }
-  Angular says {{ "Hello World!" }}
-%p
-  Angular says {{ "Hello World!" }}
+  = preserve do
+    :escaped
+      %p{ "ng-init" => "words = [{text: 'Hello'}, {text: 'World'}]"}
+        The power of Angular stems from its simple local two-way-binding.
+
+%p{ "ng-init" => "words = [{text: 'Hello'}, {text: 'World'}]"}
+  The power of Angular stems from its simple local two-way-binding.
 
 %hr
 
 %pre{ "ng-non-bindable" => true }
-  It can even add: 1 + 1 = {{ 1 + 1 }}
-%p
-  It can even add: 1 + 1 = {{ 1 + 1 }}
+  = preserve do
+    :escaped
+      %input{ type: "text", "ng-repeat" => "word in words", "ng-model" => "word.text" }
+      %button.btn.btn-default{ "ng-click" => "words.push({text: 'foo'+words.length})"} Add word
+
+%input{ type: "text", "ng-repeat-start" => "word in words", "ng-model" => "word.text" }
+%br{ "ng-repeat-end" => true }
+%button.btn.btn-default{ "ng-click" => "words.push({text: 'foo'+words.length})"} Add word
 
 %hr
 
 %pre{ "ng-non-bindable" => true }
-  Of course, so can Rails...: 1 + 1 = \#{ 1 + 1 }
+  = preserve do
+    :escaped
+      %ul
+        %li{ "ng-repeat" => "word in words"}
+          {{ word.text }}
+
+
+%ul
+  %li{ "ng-repeat" => "word in words"}
+    {{ word.text }}
+
+%hr
+
+%pre{ "ng-non-bindable" => true }
+  = preserve do
+    :escaped
+      %ul
+        %li{ "ng-repeat" => "word in words"}
+          {{ word.text.toUpperCase() }}
+
+%ul
+  %li{ "ng-repeat" => "word in words"}
+    {{ word.text.toUpperCase() }}
+
+%hr
+
 %p
-  Of course, so can Rails...: 1 + 1 = #{ 1 + 1 }
+  The end result: Angular's built-in directives
+  can handle most basic DOM manipulation for you, freeing you to write
+  powerful data-driven client-side applications.
