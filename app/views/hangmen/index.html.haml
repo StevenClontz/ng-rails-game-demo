@@ -1,3 +1,4 @@
+%h3 Rails
 %table.table.table-striped
   %thead
     %tr
@@ -19,6 +20,25 @@
             %span.label.label-success Won
           - elsif game.lost?
             %span.label.label-danger Lost
+    %tr
+      %td{ colspan: 3 }
+        = link_to 'New Game', hangmen_path, method: :post, class: 'btn btn-success btn-large'
+
+%h3 Angular
+%table.table.table-striped{ "ng-init" => "hangmen = #{@hangmen.to_json}"}
+  %thead
+    %tr
+      %th
+      %th Guessed
+      %th Misses
+  %tbody
+    %tr{ "ng-repeat" => "game in hangmen"}
+      %td
+        %a.btn.btn-default{ "ng-href" => "game.id" } View
+      %td
+        {{ game.guessed }}
+      %td
+        {{game.misses}}/{{game.max_misses}}
     %tr
       %td{ colspan: 3 }
         = link_to 'New Game', hangmen_path, method: :post, class: 'btn btn-success btn-large'
