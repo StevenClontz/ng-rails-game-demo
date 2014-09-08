@@ -1,54 +1,55 @@
-%pre{ "ng-non-bindable" => true }
-  = preserve do
-    :escaped
-      %p{ "ng-init" => "words = [{text: 'Hello'}, {text: 'World'}]"}
-        The power of Angular stems from its simple local two-way-binding.
+%div{ "ng-controller" => "rootCtrl as _" }
+  %pre{ "ng-non-bindable" => true }
+    = preserve do
+      :escaped
+        %p
+          The power of Angular stems from its simple local two-way-binding.
 
-%p{ "ng-init" => "words = [{text: 'Hello'}, {text: 'World'}]"}
-  The power of Angular stems from its simple local two-way-binding.
+  %p
+    The power of Angular stems from its simple local two-way-binding.
 
-%hr
+  %hr
 
-%pre{ "ng-non-bindable" => true }
-  = preserve do
-    :escaped
-      %input{ type: "text", "ng-repeat" => "word in words", "ng-model" => "word.text" }
-      %button.btn.btn-default{ "ng-click" => "words.push({text: 'foo'+words.length})"} Add word
+  %pre{ "ng-non-bindable" => true }
+    = preserve do
+      :escaped
+        %input{ type: "text", "ng-repeat" => "word in _.words", "ng-model" => "word.text" }
+        %button.btn.btn-default{ "ng-click" => "_.addWord()"} Add word
 
-%input{ type: "text", "ng-repeat-start" => "word in words", "ng-model" => "word.text" }
-%br{ "ng-repeat-end" => true }
-%button.btn.btn-default{ "ng-click" => "words.push({text: 'foo'+words.length})"} Add word
+  %input{ type: "text", "ng-repeat-start" => "word in _.words", "ng-model" => "word.text" }
+  %br{ "ng-repeat-end" => true }
+  %button.btn.btn-default{ "ng-click" => "_.addWord()"} Add word
 
-%hr
+  %hr
 
-%pre{ "ng-non-bindable" => true }
-  = preserve do
-    :escaped
-      %ul
-        %li{ "ng-repeat" => "word in words"}
-          {{ word.text }}
+  %pre{ "ng-non-bindable" => true }
+    = preserve do
+      :escaped
+        %ul
+          %li{ "ng-repeat" => "word in _.words"}
+            {{ word.text }}
 
 
-%ul
-  %li{ "ng-repeat" => "word in words"}
-    {{ word.text }}
+  %ul
+    %li{ "ng-repeat" => "word in _.words"}
+      {{ word.text }}
 
-%hr
+  %hr
 
-%pre{ "ng-non-bindable" => true }
-  = preserve do
-    :escaped
-      %ul
-        %li{ "ng-repeat" => "word in words"}
-          {{ word.text.toUpperCase() }}
+  %pre{ "ng-non-bindable" => true }
+    = preserve do
+      :escaped
+        %ul
+          %li{ "ng-repeat" => "word in _.words"}
+            {{ word.text.toUpperCase() }}
 
-%ul
-  %li{ "ng-repeat" => "word in words"}
-    {{ word.text.toUpperCase() }}
+  %ul
+    %li{ "ng-repeat" => "word in _.words"}
+      {{ word.text.toUpperCase() }}
 
-%hr
+  %hr
 
-%p
-  The end result: Angular's built-in directives
-  can handle most basic DOM manipulation for you, freeing you to write
-  powerful data-driven client-side applications.
+  %p
+    The end result: Angular's built-in directives
+    can handle most basic DOM manipulation for you, freeing you to write
+    powerful data-driven client-side applications.
